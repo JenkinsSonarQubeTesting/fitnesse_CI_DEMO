@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
               
-                withSonarQubeEnv('Sonarqube Scanner') {
+                withSonarQubeEnv('sonar') {
                     sh "${scannerHome}/bin/sonar-scanner"
                    //sh './gradlew --info sonarqube'
                 }
