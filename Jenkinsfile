@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                echo 'Building...'
               
                 //withSonarQubeEnv('sonar') {
                     //sh "${scannerHome}/bin/sonar-scanner"
