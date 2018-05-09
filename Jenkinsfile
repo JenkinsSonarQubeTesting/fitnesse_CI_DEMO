@@ -6,13 +6,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
-              
-                //withSonarQubeEnv('sonar') {
-                    //sh "${scannerHome}/bin/sonar-scanner"
-                   sh './gradlew'
-                //}
+                  sh './gradlew'
             }
+            
+        }
+        stage('Test') {
+            steps {
+                  sh './gradlew test'
+            }
+           
         }
         stage('Sonarqube'){
             steps{
