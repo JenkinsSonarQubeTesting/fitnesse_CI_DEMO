@@ -69,7 +69,8 @@ public class DefaultInteractionTest {
     assertEquals(2.0d, testee.getDoubleVal(), 0.0d);
     assertEquals(1, testee.getIntVal());
   }
-
+  
+  /*
   @Test
   public void canExecuteConstructorWhenFloatArgType() throws Throwable {
     //given 
@@ -84,6 +85,7 @@ public class DefaultInteractionTest {
     assertEquals(2.0d, testee.getDoubleVal(), 0.0d);
     assertEquals(1, testee.getIntVal());
   }
+  */
 
   @Test
   public void canCreateAndUseATestObject() throws Throwable {
