@@ -10,6 +10,7 @@ pipeline {
                 //withSonarQubeEnv('sonar') {
                     //sh "${scannerHome}/bin/sonar-scanner"
                    //sh './gradlew --info sonarqube'
+                //}
             }
         }
         stage('Sonarqube'){
