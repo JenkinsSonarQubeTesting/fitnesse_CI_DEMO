@@ -1,4 +1,3 @@
-// testttt
 pipeline {
     agent any
     environment {
@@ -8,9 +7,15 @@ pipeline {
         stage('Build') {
             steps {
               
+                //withSonarQubeEnv('sonar') {
+                    //sh "${scannerHome}/bin/sonar-scanner"
+                   //sh './gradlew --info sonarqube'
+            }
+        }
+        stage('Sonarqube'){
+            steps{
                 withSonarQubeEnv('sonar') {
                     sh "${scannerHome}/bin/sonar-scanner"
-                   //sh './gradlew --info sonarqube'
                 }
             }
         }
