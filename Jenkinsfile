@@ -14,7 +14,7 @@ pipeline {
             steps {
                   sh './gradlew test'
             }
-            
+           
         }
         stage('Sonarqube'){
             steps{
