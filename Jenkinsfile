@@ -10,12 +10,14 @@ pipeline {
             }
             
         }
+        /*
         stage('Test') {
             steps {
                   sh './gradlew test'
             }
            
         }
+        */
         stage('Sonarqube'){
             steps{
                 withSonarQubeEnv('sonar') {
