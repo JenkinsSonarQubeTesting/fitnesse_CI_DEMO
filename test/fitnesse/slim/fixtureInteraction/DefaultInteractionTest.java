@@ -14,8 +14,6 @@ import org.junit.Test;
  */
 public class DefaultInteractionTest {
 
-/*
-
   private final Class<Testee> testeeClass = Testee.class;
   private Constructor<?> cstr;
   private Method setI;
@@ -110,5 +108,4 @@ public class DefaultInteractionTest {
     String expectedMockingOnlyString = "----mockingOnly----";
     assertEquals("should be able create, and call setters and getters. These won't work", expectedMockingOnlyString, gotI);
   }
-  */
 }
