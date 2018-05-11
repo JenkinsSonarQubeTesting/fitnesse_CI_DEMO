@@ -1,4 +1,3 @@
-// Looks like one trigger is going off
 pipeline {
     agent any
     environment {
