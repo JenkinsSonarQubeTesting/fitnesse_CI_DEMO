@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 
 import static fitnesse.ConfigurationParameter.*;
 
-//TODO test test test
 
 public class FitNesseMain {
   private static final Logger LOG = Logger.getLogger(FitNesseMain.class.getName());
