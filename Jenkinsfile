@@ -8,14 +8,14 @@ pipeline {
             steps {
                   sh './gradlew'
             }
-            
+         
+        //TODO test test test
         }
         /*
         stage('Test') {
             steps {
                   sh './gradlew test'
             }
-           
         }
         */
         stage('Sonarqube'){
