@@ -8,8 +8,7 @@ pipeline {
             steps {
                   sh './gradlew'
             }
-         
-        //TODO test test test
+       
         }
         /*
         stage('Test') {
