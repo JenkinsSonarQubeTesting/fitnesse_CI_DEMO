@@ -47,11 +47,6 @@ public class FitNesseMain {
     }
   }
   
-  // This is an empty dummy method to try and get sonarqube to go off
-  public void dummyMethod(args){
-    
-  }
-
   protected static void exit(int exitCode) {
     System.exit(exitCode);
   }
