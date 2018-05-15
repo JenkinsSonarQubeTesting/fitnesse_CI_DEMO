@@ -47,11 +47,6 @@ public class FitNesseMain {
     }
   }
   
-  // Poorly written method in an attempt to have sonarqube pick up on it
-  public Integer dummyMethod(args){
-    return "This should hopfully be picked up by SonarQube";
-  }
-  
   protected static void exit(int exitCode) {
     System.exit(exitCode);
   }
