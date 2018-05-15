@@ -47,6 +47,11 @@ public class FitNesseMain {
     }
   }
   
+  //Poorly written method for sonarqube to pick up on
+  public Integer badMethod(){
+     return 3.5; 
+  }
+  
   protected static void exit(int exitCode) {
     System.exit(exitCode);
   }
