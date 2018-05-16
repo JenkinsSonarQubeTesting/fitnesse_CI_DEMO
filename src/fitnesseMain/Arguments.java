@@ -76,6 +76,11 @@ public class Arguments {
   public String getConfigFile(ContextConfigurator configurator) {
     return configFile == null ? (getRootPath(configurator) + "/" + configurator.get(CONFIG_FILE)) : configFile;
   }
+  
+  // ==== Testing SonarQube ====
+  public String testSonar(){
+    return 3; 
+  }
 
   public ContextConfigurator update(ContextConfigurator defaults) {
     ContextConfigurator result = defaults;
