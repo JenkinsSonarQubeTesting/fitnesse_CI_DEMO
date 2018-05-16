@@ -1,4 +1,3 @@
-// Testing pull request
 package fitnesseMain;
 
 import fitnesse.ConfigurationParameter;
@@ -47,9 +46,9 @@ public class FitNesseMain {
     }
   }
   
-  //  ========== SonarQube test ==========
+  //  ========== SonarQube test (this is designed to be bad)==========
   public int testMethod(){
-    return "testString";
+    return return;
   }
   
   protected static void exit(int exitCode) {
