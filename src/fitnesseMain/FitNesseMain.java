@@ -46,11 +46,6 @@ public class FitNesseMain {
     }
   }
   
-  //  ========== SonarQube test (this is designed to be bad)==========
-  public int testMethod(){
-    return return;
-  }
-  
   protected static void exit(int exitCode) {
     System.exit(exitCode);
   }
