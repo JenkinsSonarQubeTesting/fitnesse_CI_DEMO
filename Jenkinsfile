@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
           def scannerHome = tool 'sonar_scanner'
+          def prNo = '${CHANGE_ID}'
     }
     stages {
         stage('Build') {
@@ -20,13 +21,13 @@ pipeline {
         */
         stage('Sonarqube'){
             steps{
-                prNo = env.CHANGE_ID
                 withCredentials([[$class: 'StringBinding', credentialsId: 'Carter-Admin', variable: 'GITHUB_TOKEN']]) {
                     withSonarQubeEnv('sonar') {
-                        mvn "-Dsonar.analysis.mode=preview "+
-                            "-Dsonar.github.pullRequest=${prNo} "+
-                            "-Dsonar.github.oauth=${GITHUB_TOKEN} "+
-                            "-Dsonar.github.endpoint=https://api.github.com/ org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar"
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=preview "+
+                        "-Dsonar.github.repository=JenkinsSonarQubeTesting/fitnesse_CI_DEMO "+
+                        "-Dsonar.github.pullRequest=${prNo} "+
+                        "-Dsonar.github.oauth=${GITHUB_TOKEN} "+
+                        "-Dsonar.github.endpoint=https://api.github.com/"
                     }
                 }
             }

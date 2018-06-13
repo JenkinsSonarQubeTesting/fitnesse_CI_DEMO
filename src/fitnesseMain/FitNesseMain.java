@@ -1,4 +1,3 @@
-// Testing pull request
 package fitnesseMain;
 
 import fitnesse.ConfigurationParameter;
