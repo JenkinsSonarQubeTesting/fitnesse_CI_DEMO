@@ -6,6 +6,7 @@ pipeline {
           def prNo = "${CHANGE_ID}"
           def repo_url = "${env.GIT_URL}"
           def repo_name = repo_url.replace("https://github.com/","").replace(".git","")
+          def jenkins_credentials_ID = 'Carter-Admin'
     }
     stages {
         stage('Build') {
@@ -28,13 +29,13 @@ pipeline {
                 }
             }
             steps{
-                withCredentials([[$class: 'StringBinding', credentialsId: 'Carter-Admin', variable: 'GITHUB_TOKEN']]) {
+                withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]) {
                     withSonarQubeEnv('sonar') {
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=preview "+
-                        "-Dsonar.github.repository=JenkinsSonarQubeTesting/fitnesse_CI_DEMO "+
-                        "-Dsonar.github.pullRequest=${prNo} "+
-                        "-Dsonar.github.oauth=${GITHUB_TOKEN} "+
-                        "-Dsonar.github.endpoint=https://api.github.com/"
+                            "-Dsonar.github.repository=${repo_name} "+
+                            "-Dsonar.github.pullRequest=${prNo} "+
+                            "-Dsonar.github.oauth=${GITHUB_TOKEN} "+
+                            "-Dsonar.github.endpoint=https://api.github.com/"
                     }
                 }
             }
@@ -47,7 +48,7 @@ pipeline {
             }
             steps{
                script{
-                   withCredentials([[$class: 'StringBinding', credentialsId: 'Carter-Admin', variable: 'GITHUB_TOKEN']]) {
+                   withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]) {
                        changed_files = sh (script: "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" \"https://api.github.com/repos/${repo_name}/pulls/${prNo}/files\"", returnStdout: true).trim()
                        def json_map = parseJson(changed_files)
                        if(isLowsecrisk(getLowsecriskConditions(), json_map.filename)){
