@@ -76,8 +76,7 @@ def postComment(message){
 }
 
 def getLowsecriskConditions(){
-    // 'jenkins' for testing purposes, remove after
-    return ['test', '.xml', 'jenkins']
+    return ['test', '.xml']
 }
 
 def getLowsecriskComment(){
