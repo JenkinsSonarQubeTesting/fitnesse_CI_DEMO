@@ -69,7 +69,7 @@ def parseJson(jsonText) {
 
 def postComment(message){
     script{
-        withCredentials([[$class: 'StringBinding', credentialsId: 'Carter-Admin', variable: 'GITHUB_TOKEN']]) {
+        withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]) {
             sh "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" -X POST -d '{\"body\": \"${message}\"}' \"https://api.github.com/repos/${repo_name}/issues/${prNo}/comments\""
         }
     }
