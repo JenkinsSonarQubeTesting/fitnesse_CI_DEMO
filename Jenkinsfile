@@ -1,4 +1,4 @@
-import groovy.json.JsonSlurperClassic
+import groovy.json.*
 pipeline {
     agent any
     environment {
@@ -13,7 +13,7 @@ pipeline {
             steps {
                   sh './gradlew'
             }
-            
+
         }
         /*
         stage('Test') {
@@ -63,8 +63,8 @@ pipeline {
 }
 
 def parseJson(jsonText) {
-  final slurper = new groovy.json.JsonSlurperClassic()
-  return slurper.parseText(jsonText)
+    json_map = readJSON text: jsonText
+    return json_map
 }
 
 def postComment(message){
@@ -76,11 +76,12 @@ def postComment(message){
 }
 
 def getLowsecriskConditions(){
-    return ['test', '.xml']   
+    // 'jenkins' for testing purposes, remove after
+    return ['test', '.xml', 'jenkins']
 }
 
 def getLowsecriskComment(){
-    return '@lowsecrisk (Automated comment)'   
+    return '@lowsecrisk (Automated comment)'
 }
 
 def isLowsecrisk(conditions, edited_files){
