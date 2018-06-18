@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
           def scannerHome = tool 'sonar_scanner'
-          def prNo = '${CHANGE_ID}'
+          def prNo = "${CHANGE_ID}"
           def repo_url = "${env.GIT_URL}"
           def repo_name = repo_url.replace("https://github.com/","").replace(".git","")
     }
@@ -22,6 +22,11 @@ pipeline {
         }
         */
         stage('Sonarqube'){
+            when {
+                expression {
+                    "${prNo}" != "null"
+                }
+            }
             steps{
                 withCredentials([[$class: 'StringBinding', credentialsId: 'Carter-Admin', variable: 'GITHUB_TOKEN']]) {
                     withSonarQubeEnv('sonar') {
@@ -35,6 +40,11 @@ pipeline {
             }
         }
         stage('Check Security Risk'){
+            when {
+                expression {
+                    "${prNo}" != "null"
+                }
+            }
             steps{
                script{
                    withCredentials([[$class: 'StringBinding', credentialsId: 'Carter-Admin', variable: 'GITHUB_TOKEN']]) {
