@@ -50,8 +50,7 @@ pipeline {
                    withCredentials([[$class: 'StringBinding', credentialsId: 'Carter-Admin', variable: 'GITHUB_TOKEN']]) {
                        if(prNo){
                            changed_files = sh (script: "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" \"https://api.github.com/repos/${repo_name}/pulls/${prNo}/files\"", returnStdout: true).trim()
-                           def slurper = new groovy.json.JsonSlurper()
-                           def map = slurper.parseText(changed_files)
+                           def map = parseJson(changed_files)
                            // test echo
                            map.filename.each {echo "${it}"}
                            if(isLowsecrisk(getLowsecriskConditions(), map.filename)){
@@ -64,6 +63,11 @@ pipeline {
             }
         }
     }
+}
+
+def parseJson(jsonText) {
+  final slurper = new groovy.json.JsonSlurper()
+  return slurper.parseText(jsonText)
 }
 
 def postComment(message){
