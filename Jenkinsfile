@@ -48,13 +48,11 @@ pipeline {
             steps{
                script{
                    withCredentials([[$class: 'StringBinding', credentialsId: 'Carter-Admin', variable: 'GITHUB_TOKEN']]) {
-                       if(prNo){
-                           changed_files = sh (script: "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" \"https://api.github.com/repos/${repo_name}/pulls/${prNo}/files\"", returnStdout: true).trim()
-                           def json_map = parseJson(changed_files)
-                           if(isLowsecrisk(getLowsecriskConditions(), json_map.filename)){
-                               echo 'Low security risk, posting comment...'
-                               postComment(getLowsecriskComment())
-                           }
+                       changed_files = sh (script: "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" \"https://api.github.com/repos/${repo_name}/pulls/${prNo}/files\"", returnStdout: true).trim()
+                       def json_map = parseJson(changed_files)
+                       if(isLowsecrisk(getLowsecriskConditions(), json_map.filename)){
+                           echo 'Low security risk, posting comment...'
+                           postComment(getLowsecriskComment())
                        }
                    }
                }
