@@ -7,6 +7,7 @@ pipeline {
           def repo_url = "${env.GIT_URL}"
           def repo_name = repo_url.replace("https://github.com/","").replace(".git","")
           def jenkins_credentials_ID = 'Carter-Admin'
+          def github_security_risk_user = 'Carter-DM'
     }
     stages {
         stage('Build') {
@@ -47,16 +48,13 @@ pipeline {
                 }
             }
             steps{
-               script{
-                   withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]) {
-                       def changed_files = sh (script: "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" \"https://api.github.com/repos/${repo_name}/pulls/${prNo}/files\"", returnStdout: true).trim()
-                       def json_map = parseJson(changed_files)
-                       if(isLowsecrisk(getLowsecriskConditions(), json_map.filename)){
-                           echo 'Low security risk, posting comment...'
-                           postComment(getLowsecriskComment())
-                       }
-                   }
-               }
+                script{
+                    def changed_files = getChangedFiles()
+                    if(isLowsecrisk(getLowsecriskConditions(), changed_files.filename)){
+                       echo 'Low security risk, approving PR...'
+                       postReview(getLowsecriskComment())
+                    }
+                }
             }
         }
     }
@@ -67,10 +65,19 @@ def parseJson(jsonText) {
     return json_map
 }
 
-def postComment(message){
+def getChangedFiles(){
     script{
         withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]) {
-            sh "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" -X POST -d '{\"body\": \"${message}\"}' \"https://api.github.com/repos/${repo_name}/issues/${prNo}/comments\""
+            def pr_files = sh (script: "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" \"https://api.github.com/repos/${repo_name}/pulls/${prNo}/files\"", returnStdout: true).trim()
+            return parseJson(pr_files)
+        }
+    }
+}
+
+def postReview(message){
+    script{
+        withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]) {
+            sh "curl -s -H \"Authorization: token ${GITHUB_TOKEN}\" -X POST -d '{\"body\": \"${message}\", \"event\": \"APPROVE\"}' \"https://api.github.com/repos/${repo_name}/pulls/${prNo}/reviews\""
         }
     }
 }
@@ -80,7 +87,7 @@ def getLowsecriskConditions(){
 }
 
 def getLowsecriskComment(){
-    return '@lowsecrisk (Automated comment)'
+    return '@lowsecrisk (Automated review)'
 }
 
 def isLowsecrisk(conditions, edited_files){
