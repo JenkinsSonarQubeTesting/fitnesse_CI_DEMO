@@ -7,7 +7,6 @@ pipeline {
           def repo_url = "${env.GIT_URL}"
           def repo_name = repo_url.replace("https://github.com/","").replace(".git","")
           def jenkins_credentials_ID = 'Carter-Admin'
-          def github_security_risk_user = 'Carter-DM'
     }
     stages {
         stage('Build') {
