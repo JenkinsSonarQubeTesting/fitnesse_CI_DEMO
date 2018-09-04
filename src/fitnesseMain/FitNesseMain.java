@@ -50,6 +50,11 @@ public class FitNesseMain {
   protected static void exit(int exitCode) {
     System.exit(exitCode);
   }
+  
+  // Testing codebeat
+  public static void test1(){
+   return false; 
+  }
 
   public Integer launchFitNesse(Arguments arguments) throws Exception {
     ContextConfigurator contextConfigurator = ContextConfigurator.systemDefaults();
