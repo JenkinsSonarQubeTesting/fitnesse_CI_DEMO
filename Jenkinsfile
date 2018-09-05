@@ -1,4 +1,4 @@
-// Testinnng
+// Test
 pipeline {
     agent any
     environment {
