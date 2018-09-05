@@ -51,9 +51,13 @@ public class FitNesseMain {
     System.exit(exitCode);
   }
   
-  // Testing codebeat
+  // Testing code anaylsis tools
   public static void test1(){
    return false; 
+  }
+  
+  public static int test2(){
+    return 2;
   }
 
   public Integer launchFitNesse(Arguments arguments) throws Exception {
