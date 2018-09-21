@@ -22,10 +22,12 @@ pipeline {
         }
         */
         stage('SonarQube Analysis'){
-           def scannerHome = tool 'sonar_scanner'
-           withSonarQubeEnv('sonar'){
-               sh "${scannerHome}/bin/sonar-scanner"
-           }
+            steps{
+                def scannerHome = tool 'sonar_scanner'
+                withSonarQubeEnv('sonar'){
+                    sh "${scannerHome}/bin/sonar-scanner"   
+                }
+            }
         }
         stage('Check Security Risk'){
             when {
