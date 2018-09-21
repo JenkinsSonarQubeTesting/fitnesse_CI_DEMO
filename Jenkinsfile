@@ -24,20 +24,22 @@ pipeline {
         */
         stage('SonarQube Analysis'){
             steps{
-                if(env.BRANCH_NAME.startsWith("PR-")){
-                    withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]){
-                        withSonarQubeEnv('sonar'){
-                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=preview "+
-                                "-Dsonar.github.repository=${repo_name} "+
-                                "-Dsonar.github.pullRequest=${prNo} "+
-                                "-Dsonar.github.oauth=${GITHUB_TOKEN} "+
-                                "-Dsonar.github.endpoint=https://api.github.com/"
+                script{
+                    if(env.BRANCH_NAME.startsWith("PR-")){
+                        withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]){
+                            withSonarQubeEnv('sonar'){
+                                sh "${scannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=preview "+
+                                    "-Dsonar.github.repository=${repo_name} "+
+                                    "-Dsonar.github.pullRequest=${prNo} "+
+                                    "-Dsonar.github.oauth=${GITHUB_TOKEN} "+
+                                    "-Dsonar.github.endpoint=https://api.github.com/"
+                            }
                         }
                     }
-                }
-                else{
-                    withSonarQubeEnv('sonar'){
-                        sh "${scannerHome}/bin/sonar-scanner"
+                    else{
+                        withSonarQubeEnv('sonar'){
+                            sh "${scannerHome}/bin/sonar-scanner"
+                        }
                     }
                 }
             }
