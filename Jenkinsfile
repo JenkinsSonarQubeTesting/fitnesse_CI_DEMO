@@ -2,7 +2,6 @@ import groovy.json.*
 pipeline {
     agent any
     environment {
-          def scannerHome = tool 'sonar_scanner'
           def prNo = "${CHANGE_ID}"
           def repo_url = "${env.GIT_URL}"
           def repo_name = repo_url.replace("https://github.com/","").replace(".git","")
@@ -22,23 +21,11 @@ pipeline {
             }
         }
         */
-        stage('Sonarqube'){
-            when {
-                expression {
-                    "${prNo}" != "null"
-                }
-            }
-            steps{
-                withCredentials([[$class: 'StringBinding', credentialsId: "${jenkins_credentials_ID}", variable: 'GITHUB_TOKEN']]) {
-                    withSonarQubeEnv('sonar') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=preview "+
-                            "-Dsonar.github.repository=${repo_name} "+
-                            "-Dsonar.github.pullRequest=${prNo} "+
-                            "-Dsonar.github.oauth=${GITHUB_TOKEN} "+
-                            "-Dsonar.github.endpoint=https://api.github.com/"
-                    }
-                }
-            }
+        stage('SonarQube Analysis'){
+           def scannerHome = tool 'sonar_scanner'
+           withSonarQubeEnv('sonar'){
+               sh "${scannerHome}/bin/sonar-scanner"
+           }
         }
         stage('Check Security Risk'){
             when {
