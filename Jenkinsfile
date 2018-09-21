@@ -2,6 +2,7 @@ import groovy.json.*
 pipeline {
     agent any
     environment {
+          def scannerHome = tool 'sonar_scanner'
           def prNo = "${CHANGE_ID}"
           def repo_url = "${env.GIT_URL}"
           def repo_name = repo_url.replace("https://github.com/","").replace(".git","")
@@ -23,7 +24,6 @@ pipeline {
         */
         stage('SonarQube Analysis'){
             steps{
-                def scannerHome = tool 'sonar_scanner'
                 withSonarQubeEnv('sonar'){
                     sh "${scannerHome}/bin/sonar-scanner"   
                 }
