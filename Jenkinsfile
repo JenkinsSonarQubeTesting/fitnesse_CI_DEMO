@@ -1,6 +1,6 @@
 import groovy.json.*
 pipeline {
-    agent any
+    agent 'testNode'
     environment {
           def prNo = "${CHANGE_ID}"
           def repo_url = "${env.GIT_URL}"
@@ -46,9 +46,6 @@ pipeline {
         }
         stage('Run Terraform'){
             steps{
-                agent {
-                    label 'testNode'
-                }
                 sh 'terraform show'
             }
         }
