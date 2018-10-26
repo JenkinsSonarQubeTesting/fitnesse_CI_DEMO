@@ -44,6 +44,14 @@ pipeline {
                 }
             }
         }
+        stage('Run Terraform'){
+            agent {
+                label 'testNode'   
+            }
+            script{
+               sh "terraform show"   
+            }
+        }
         stage('Check Security Risk'){
             when {
                 expression {
