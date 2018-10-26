@@ -1,6 +1,8 @@
 import groovy.json.*
 pipeline {
-    agent 'testNode'
+    agent {
+        label 'testNode'
+    }
     environment {
           def prNo = "${CHANGE_ID}"
           def repo_url = "${env.GIT_URL}"
