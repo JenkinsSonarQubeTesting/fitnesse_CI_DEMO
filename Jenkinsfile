@@ -45,11 +45,11 @@ pipeline {
             }
         }
         stage('Run Terraform'){
-            agent {
-                label 'testNode'   
-            }
-            script{
-               sh "terraform show"   
+            steps{
+                agent {
+                    label 'testNode'
+                }
+                sh 'terraform show'
             }
         }
         stage('Check Security Risk'){
