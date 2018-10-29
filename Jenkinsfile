@@ -50,7 +50,7 @@ pipeline {
             steps{
                 script{
                     sh 'echo $PATH'
-                    env.PATH = "${env.PATH}:${env.WORKSPACE}"
+                    sh 'which terraform'
                     sh 'terraform init'
                 }
             }
