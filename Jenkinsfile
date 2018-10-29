@@ -49,7 +49,8 @@ pipeline {
         stage('Run Terraform'){
             steps{
                 script{
-                    sh 'echo $PATH'
+                    def terraformHome = tool 'terraform'
+                    sh 'echo terraformHome'
                     sh 'which terraform'
                     sh 'terraform init'
                 }
