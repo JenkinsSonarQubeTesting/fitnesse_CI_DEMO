@@ -50,7 +50,7 @@ pipeline {
             steps{
                 script{
                     def terraformHome = tool 'terraform'
-                    sh 'echo terraformHome'
+                    sh "echo ${terraformHome}"
                     sh 'which terraform'
                     sh 'terraform init'
                 }
