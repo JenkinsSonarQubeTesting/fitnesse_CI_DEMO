@@ -23,7 +23,6 @@ pipeline {
             }
         }
         */
-        /*
         stage('SonarQube Analysis'){
             steps{
                 script{
@@ -47,7 +46,6 @@ pipeline {
                 }
             }
         }
-        */
         stage('Run Terraform'){
             steps{
                 sh 'echo $PATH'
