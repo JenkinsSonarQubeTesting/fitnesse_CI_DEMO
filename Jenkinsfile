@@ -48,9 +48,11 @@ pipeline {
         }
         stage('Run Terraform'){
             steps{
-                sh 'echo $PATH'
-                env.PATH = "${env.PATH}:${env.WORKSPACE}"
-                sh 'terraform show'
+                script{
+                    sh 'echo $PATH'
+                    env.PATH = "${env.PATH}:${env.WORKSPACE}"
+                    sh 'terraform show'
+                }
             }
         }
         stage('Check Security Risk'){
