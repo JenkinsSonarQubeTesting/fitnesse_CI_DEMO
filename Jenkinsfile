@@ -49,8 +49,9 @@ pipeline {
         stage('Run Terraform'){
             steps{
                 script{
-                    def terraformHome = tool 'terraform'
-                    sh "${terraformHome}/terraform show"
+                    withEnv(["PATH+terraform=${tool 'terraform'}"]){
+                        sh 'terraform show'
+                    }
                 }
             }
         }
