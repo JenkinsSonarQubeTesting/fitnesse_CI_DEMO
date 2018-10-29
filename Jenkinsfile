@@ -1,7 +1,7 @@
 import groovy.json.*
 pipeline {
     agent {
-        label 'master'
+        label 'testNode'
     }
     environment {
           def prNo = "${CHANGE_ID}"
