@@ -50,7 +50,7 @@ pipeline {
             steps{
                 script{
                     def terraformHome = tool 'terraform'
-                    sh "export PATH=$PATH:${terraformHome}"
+                    sh "export PATH=$PATH:${terraformHome}/terraform"
                     sh 'terraform init'
                 }
             }
