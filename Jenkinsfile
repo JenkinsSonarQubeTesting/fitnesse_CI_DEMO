@@ -8,7 +8,6 @@ pipeline {
           def repo_url = "${env.GIT_URL}"
           def repo_name = repo_url.replace("https://github.com/","").replace(".git","")
           def jenkins_credentials_ID = 'Carter-Admin'
-          def terraformHome = tool 'terraform'
     }
     stages {
         stage('Build') {
@@ -50,9 +49,9 @@ pipeline {
         stage('Run Terraform'){
             steps{
                 script{
-                    //sh "export PATH=$PATH:${terraformHome}"
+                    def terraformHome = tool 'terraform'
                     sh 'echo $PATH'
-                    sh 'terraform init'
+                    sh '${terraformHome}/terraform init'
                 }
             }
         }
