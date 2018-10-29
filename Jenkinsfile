@@ -50,7 +50,7 @@ pipeline {
             steps{
                 script{
                     def terraformHome = tool 'terraform'
-                    sh "sudo mv ${terraformHome} /usr/bin"
+                    sh "export PATH=${terraformHome}"
                     sh 'which terraform'
                     sh 'terraform init'
                 }
