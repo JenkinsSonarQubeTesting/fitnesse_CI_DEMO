@@ -50,7 +50,7 @@ pipeline {
             steps{
                 script{
                     def terraformHome = tool 'terraform'
-                    sh "mv ${terraformHome} /usr/bin
+                    sh "mv ${terraformHome} /usr/bin"
                     sh 'which terraform'
                     sh 'terraform init'
                 }
