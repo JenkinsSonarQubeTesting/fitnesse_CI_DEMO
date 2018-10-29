@@ -48,6 +48,7 @@ pipeline {
         }
         stage('Run Terraform'){
             steps{
+                sh 'echo $PATH'
                 sh 'terraform show'
             }
         }
