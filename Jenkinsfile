@@ -50,7 +50,7 @@ pipeline {
             steps{
                 script{
                     def terraformHome = tool 'terraform'
-                    sh "${terraformHome} --version"
+                    sh "${terraformHome}/terraform --version"
                 }
             }
         }
