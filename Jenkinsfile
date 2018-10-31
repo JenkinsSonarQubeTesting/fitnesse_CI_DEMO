@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh "echo $PATH"
-                // sh './gradlew'
+                sh './gradlew -x deployTerraform'
             }
 
         }
@@ -56,8 +56,6 @@ pipeline {
                             string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
                             string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
                         ]){
-                            sh "echo ${terraformHome}"
-                            sh "echo $PATH"
                             sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} -PterraformHome=${terraformHome}"
                             /*
                             sh "terraform init"
