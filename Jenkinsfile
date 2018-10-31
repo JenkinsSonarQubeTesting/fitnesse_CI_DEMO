@@ -50,7 +50,12 @@ pipeline {
             steps{
                 script{
                     withEnv(["PATH+terraform=${tool 'terraform'}"]){
-                        sh "terraform init"
+                        withCredentials([
+                            secretText(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
+                            secretText(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
+                        ]){
+                            sh "terraform init -var 'aws_user_ID=${USER_ID}' -var 'role_name=${ROLE_NAME}' -var 'region=us-east-1"
+                        }
                     }
                 }
             }
