@@ -54,7 +54,8 @@ pipeline {
                             string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
                             string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
                         ]){
-                            sh "terraform init -var 'aws_user_ID=${USER_ID}' -var 'role_name=${ROLE_NAME}' -var 'region=us-east-1'"
+                            sh "terraform init"
+                            sh "terraform apply -var 'aws_user_ID=${USER_ID}' -var 'role_name=${ROLE_NAME}' -var 'region=us-east-1'"
                         }
                     }
                 }
