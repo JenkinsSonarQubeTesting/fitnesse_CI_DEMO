@@ -12,8 +12,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                def terraformHome = tool 'terraform'
-                sh "echo ${terraformHome}"
                 sh "echo $PATH"
                 sh './gradlew'
             }
