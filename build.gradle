@@ -238,7 +238,7 @@ task release {
 
 task deployTerraform (type: Exec){
   commandLine 'terraform', 'init'
-  // commandLine 'sh', 'terraform apply -var "aws_user_ID=${USER_ID}" -var "role_name=${ROLE_NAME}" -var "region=us-east-1" -input=false -auto-approve'
+  commandLine 'terraform', 'apply',  '-var "aws_user_ID=${USER_ID}"', '-var "role_name=${ROLE_NAME}', '-var "region=us-east-1"', '-input=false',  '-auto-approve'
 }
 
 clean {
