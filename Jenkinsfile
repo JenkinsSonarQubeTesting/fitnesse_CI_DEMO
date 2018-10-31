@@ -12,12 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withCredentials([
-                    string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
-                    string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
-                ]){
-                    sh "./gradlew -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME}"
-                }
+                sh './gradlew'
             }
 
         }
@@ -51,7 +46,6 @@ pipeline {
                 }
             }
         }
-        /*
         stage('Run Terraform'){
             steps{
                 script{
@@ -60,14 +54,16 @@ pipeline {
                             string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
                             string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
                         ]){
+                            sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME}"
+                            /*
                             sh "terraform init"
                             sh "terraform apply -var 'aws_user_ID=${USER_ID}' -var 'role_name=${ROLE_NAME}' -var 'region=us-east-1' -input=false -auto-approve"
+                            */
                         }
                     }
                 }
             }
         }
-        */
         stage('Check Security Risk'){
             when {
                 expression {
