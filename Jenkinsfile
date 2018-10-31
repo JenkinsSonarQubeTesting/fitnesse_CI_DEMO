@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh "echo $PATH"
-                sh './gradlew build -x deployTerraform'
+                sh './gradlew'
             }
 
         }
