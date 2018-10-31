@@ -12,7 +12,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                  sh './gradlew'
+                withCredentials([
+                    string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
+                    string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
+                ]){
+                  sh "./gradlew"
+                }
             }
 
         }
@@ -46,6 +51,7 @@ pipeline {
                 }
             }
         }
+        /*
         stage('Run Terraform'){
             steps{
                 script{
@@ -61,6 +67,7 @@ pipeline {
                 }
             }
         }
+        */
         stage('Check Security Risk'){
             when {
                 expression {
