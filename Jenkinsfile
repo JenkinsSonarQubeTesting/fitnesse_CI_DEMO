@@ -50,7 +50,7 @@ pipeline {
             steps{
                 script{
                     withEnv(["PATH+terraform=${tool 'terraform'}"]){
-                        sh 'terraform init'
+                        sh "terraform init"
                     }
                 }
             }
