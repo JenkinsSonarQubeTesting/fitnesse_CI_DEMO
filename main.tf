@@ -1,8 +1,8 @@
 provider "aws" {
   assume_role {
-    role_arn = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
+    role_arn = "arn:aws:iam::${var.aws_user_ID}:role/${var.role_name}"
   }
-  region = "us-east-2"
+  region = "${var.region}"
 }
 
 resource "aws_security_group" "terraform-test" {
@@ -17,6 +17,6 @@ resource "aws_security_group" "terraform-test" {
   }
 
   tags {
-    Name = "allow_all"
+    Name = "terraform-test"
   } 
 }
