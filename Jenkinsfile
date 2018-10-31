@@ -54,6 +54,8 @@ pipeline {
                             string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
                             string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
                         ]){
+                            sh "echo ${terraform}"
+                            sh "echo $PATH"
                             sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} -PterraformHome=${terraform}"
                             /*
                             sh "terraform init"
