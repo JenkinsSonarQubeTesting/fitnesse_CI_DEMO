@@ -23,6 +23,7 @@ plugins {
   id 'java'
   id "maven-publish"
   id "com.jfrog.bintray" version "1.6"
+  id "org.sonarqube" version "2.6"
 }
 
 apply plugin: "info.solidsoft.pitest"
@@ -233,6 +234,12 @@ task snapshotRelease {
 
 task release {
   dependsOn releaseTag, prepareReleaseRepo, bintrayUpload, publishTag
+}
+
+task deployTerraform (type: Exec){
+  environment 'PATH', "${environment.PATH}:${project.hasProperty('terraformHome') ? $terraformHome : ''}"
+  commandLine 'terraform', 'init'
+  commandLine 'terraform', 'apply',  '-var "aws_user_ID=${USER_ID}"', '-var "role_name=${ROLE_NAME}', '-var "region=us-east-1"', '-input=false',  '-auto-approve'
 }
 
 clean {

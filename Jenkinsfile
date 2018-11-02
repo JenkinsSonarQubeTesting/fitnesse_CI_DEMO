@@ -1,7 +1,7 @@
 import groovy.json.*
 pipeline {
     agent {
-        label 'master'
+        label 'testNode'
     }
     environment {
           def prNo = "${CHANGE_ID}"
@@ -12,7 +12,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                  sh './gradlew'
+                sh "echo $PATH"
+                sh './gradlew'
             }
 
         }
@@ -48,7 +49,21 @@ pipeline {
         }
         stage('Run Terraform'){
             steps{
-                sh 'terraform show'
+                script{
+                    def terraformHome = tool 'terraform'
+                    withEnv(["PATH+terraform=${tool 'terraform'}"]){
+                        withCredentials([
+                            string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
+                            string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
+                        ]){
+                            sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} -PterraformHome=${terraformHome}"
+                            /*
+                            sh "terraform init"
+                            sh "terraform apply -var 'aws_user_ID=${USER_ID}' -var 'role_name=${ROLE_NAME}' -var 'region=us-east-1' -input=false -auto-approve"
+                            */
+                        }
+                    }
+                }
             }
         }
         stage('Check Security Risk'){
