@@ -12,6 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                echo "${PATH}"
                 // sh './gradlew'
             }
 
