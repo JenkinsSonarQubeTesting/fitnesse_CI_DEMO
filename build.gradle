@@ -239,6 +239,7 @@ task release {
 task deployTerraform (type: Exec){
   environment "PATH", "${environment.PATH}"
   commandLine "echo", "Path: ${environment.PATH}"
+  commandLine "echo", "${InetAddress.localHost.hostName}"
   if (project.hasProperty('terraformHome')){
     commandLine "${terraformHome}", "init"
   }
