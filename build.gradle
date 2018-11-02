@@ -243,7 +243,7 @@ task deployTerraform (type: Exec){
 }
 
 task example(type: Exec) {
-    commandLine 'echo', "project.findProperty('foo') ?: 'bar'"
+    commandLine "echo", "project.findProperty('foo') ?: 'bar'"
 }
 
 clean {
