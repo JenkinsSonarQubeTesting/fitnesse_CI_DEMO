@@ -237,7 +237,7 @@ task release {
 }
 
 task deployTerraform (type: Exec){
-  commandLine "echo", "${project.findProperty('terraformHome') ?: 'Can't find terraform'}"
+  commandLine "echo", "${project.findProperty('terraformHome') ?: 'No terraform'}"
   environment "PATH", "${environment.PATH}:${project.hasProperty('terraformHome') ? project.property('terraformHome') : ''}"
   commandLine "terraform", "init"
   commandLine 'terraform', 'apply',  '-var "aws_user_ID=${USER_ID}"', '-var "role_name=${ROLE_NAME}', '-var "region=us-east-1"', '-input=false',  '-auto-approve'
