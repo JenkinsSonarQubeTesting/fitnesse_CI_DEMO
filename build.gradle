@@ -237,10 +237,14 @@ task release {
 }
 
 task deployTerraform (type: Exec){
-  environment "PATH", "${environment.PATH}"
-  commandLine "echo", "Path: ${environment.PATH}"
-  if (project.hasProperty('terraformHome')){
-    commandLine "${terraformHome}", "init -debug"
+  try {
+    environment "PATH", "${environment.PATH}"
+    commandLine "echo", "Path: ${environment.PATH}"
+    if (project.hasProperty('terraformHome')){
+      commandLine "${terraformHome}", "init"
+    }
+  } catch (Exception e) {
+    commandLine "echo" "${e}"
   }
   // commandLine "terraform", "init"
   // commandLine "terraform", "apply",  "-var \"aws_user_ID=${project.findProperty('USER_ID') ?: ''}\"", "-var \"role_name=${project.findProperty('ROLE_NAME') ?: ''}\"", "-var 'region=us-east-1'", "-input=false",  "-auto-approve"
