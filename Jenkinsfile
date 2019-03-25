@@ -47,6 +47,7 @@ pipeline {
                 }
             }
         }
+        /*
         stage('Run Terraform'){
             steps{
                 script{
@@ -66,6 +67,7 @@ pipeline {
                 }
             }
         }
+        */
         stage('Check Security Risk'){
             when {
                 expression {
