@@ -58,10 +58,8 @@ pipeline {
                             string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
                         ]){
                             sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} -PterraformHome=${terraformHome}"
-                            /*
                             sh "terraform init"
                             sh "terraform apply -var 'aws_user_ID=${USER_ID}' -var 'role_name=${ROLE_NAME}' -var 'region=us-east-1' -input=false -auto-approve"
-                            */
                         }
                     }
                 }
