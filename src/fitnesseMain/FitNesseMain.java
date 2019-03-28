@@ -52,12 +52,25 @@ public class FitNesseMain {
   }
   
   // Testing code anaylsis tools
-  public static void test1(){
-   return false; 
+  public String badCommaWhiteSpaceBeforeAndAfter(String input ,String anotherInput)
+    {
+        return "badCommaWhiteSpaceBeforeAndAfter";
+    }
+
+  public void badGenericsWhiteSpace()
+  {
+      List< String> strings = Arrays.asList("hello", "world");
   }
-  
-  public static int test2(){
-    return 2;
+
+  public boolean badOperatorWhiteSpace()
+  {
+      int sum = 1+2;
+      return sum==3;
+  }
+
+  @SafeVarargs public final void badAnnotations(String... badVarargsAnnotation)
+  {
+      @SuppressWarnings("default") Hello badSuppressWarningsAnnotation;
   }
 
   public Integer launchFitNesse(Arguments arguments) throws Exception {
