@@ -62,9 +62,7 @@ public class FitNesseMain {
     }
 
   public void badGenericsWhiteSpace()
-  {
-      List< String> strings = Arrays.asList("hello", "world");
-  }
+  {List< String> strings = Arrays.asList("hello", "world");}
 
   public boolean badOperatorWhiteSpace()
   {
