@@ -51,6 +51,10 @@ public class FitNesseMain {
   }
   
   // Testing code anaylsis tools
+  public String testMethod(){
+    
+  }
+  
   public String badCommaWhiteSpaceBeforeAndAfter(String input ,String anotherInput)
     {
         return "badCommaWhiteSpaceBeforeAndAfter";
