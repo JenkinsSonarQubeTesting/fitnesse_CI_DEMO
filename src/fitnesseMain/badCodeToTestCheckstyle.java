@@ -5,6 +5,7 @@ import java.util.*; //BAD: star imports
 class  Hello
 {
   public final static String hello = "helloWorld!"; //BAD: modifier order
+
   public String badCommaWhiteSpaceBeforeAndAfter(String input ,String anotherInput)
     {
         return "badCommaWhiteSpaceBeforeAndAfter";
