@@ -2,11 +2,10 @@ package fitnesseMain;
 
 import java.util.*; //BAD: star imports
 
-public final static String hello = "helloWorld!"; //BAD: modifier order 
-
-public  class Hello 
+class  Hello
 {
-    public String badCommaWhiteSpaceBeforeAndAfter(String input ,String anotherInput)
+  public final static String hello = "helloWorld!"; //BAD: modifier order
+  public String badCommaWhiteSpaceBeforeAndAfter(String input ,String anotherInput)
     {
         return "badCommaWhiteSpaceBeforeAndAfter";
     }
@@ -18,7 +17,7 @@ public  class Hello
 
     public boolean badWhiteSpaces()
     {
-        int sum = 1+2
+        int sum = 1+2;
         System.out. println("hello");
         return sum==3;
     }
