@@ -14,6 +14,7 @@ class  Hello
     public void badGenericsWhiteSpace()
     {
       List< String> strings = Arrays.asList("hello", "world");
+      System.out.print(strings.get(0));
     }
 
     public boolean badWhiteSpaces()
