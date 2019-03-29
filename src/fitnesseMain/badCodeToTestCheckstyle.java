@@ -13,7 +13,7 @@ class  Hello
 
     public void badGenericsWhiteSpace()
     {
-      List< String> strings = Arrays.asList("hello", "world");
+      List< String> strings = Arrays.asList("foo", "bar");
       System.out.print(strings.get(0));
     }
 
