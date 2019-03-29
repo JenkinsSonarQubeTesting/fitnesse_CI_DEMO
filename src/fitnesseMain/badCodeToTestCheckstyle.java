@@ -19,9 +19,10 @@ class  Hello
 
     public boolean badWhiteSpaces()
     {
-        int sum = 1+2;
+        int sum = 2+2;
+        int diff = 2-1;
         System.out. println("hello");
-        return sum==3;
+        return sum+diff==5;
     }
 
     @SafeVarargs public final void badAnnotations(String... badVarargsAnnotation)
