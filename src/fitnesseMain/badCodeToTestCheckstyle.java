@@ -44,7 +44,14 @@ class  Hello
       //TODO
       System.out.println("bad multiple string literals");
     }
-        
+  
+    public void comments()
+    {
+      //comment comment
+      System.out.println("bad multiple string literals");
+      // this prints a string. 
+    }  
+  
     public void badMultipleEmptyLines()
     {
     
