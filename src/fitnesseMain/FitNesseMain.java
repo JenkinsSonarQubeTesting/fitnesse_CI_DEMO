@@ -1,3 +1,5 @@
+// trigger jenkins
+
 package fitnesseMain;
 
 import fitnesse.ConfigurationParameter;
@@ -48,6 +50,30 @@ public class FitNesseMain {
 
   protected static void exit(int exitCode) {
     System.exit(exitCode);
+  }
+  
+  // Testing code anaylsis tools
+  public String testMethod(){
+    
+  }
+  
+  public String badCommaWhiteSpaceBeforeAndAfter(String input ,String anotherInput)
+    {
+        return "badCommaWhiteSpaceBeforeAndAfter";
+    }
+
+  public void badGenericsWhiteSpace()
+  {List< String> strings = Arrays.asList("hello", "world");}
+
+  public boolean badOperatorWhiteSpace()
+  {
+      int sum = 1+2;
+      return sum==3;
+  }
+
+  @SafeVarargs public final void badAnnotations(String... badVarargsAnnotation)
+  {
+      @SuppressWarnings("default") Hello badSuppressWarningsAnnotation;
   }
 
   public Integer launchFitNesse(Arguments arguments) throws Exception {

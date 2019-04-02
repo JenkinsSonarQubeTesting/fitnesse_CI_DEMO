@@ -1,3 +1,4 @@
+// test
 import groovy.json.*
 pipeline {
     agent {
@@ -15,7 +16,6 @@ pipeline {
                 echo "${PATH}"
                 sh './gradlew'
             }
-
         }
         /*
         stage('Test') {
