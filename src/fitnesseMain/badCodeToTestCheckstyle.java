@@ -21,7 +21,7 @@ class  Hello
     {
         int sum = 2+2;
         int diff = 2-1;
-        System.out. println("hello");
+        System.out. println("hello"); //comment
         return sum+diff==5;
     }
 
