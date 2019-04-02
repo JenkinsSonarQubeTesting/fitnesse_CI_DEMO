@@ -49,7 +49,7 @@ class  Hello
     {
     
     
-      System.out.println("bad");
+      System.out.println("badString");
     }
     
     
